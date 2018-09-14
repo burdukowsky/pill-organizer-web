@@ -1,10 +1,34 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-const routes: Routes = [];
+import {AuthGuard} from './auth/auth.guard';
+import {MainLayoutComponent} from './layouts/main-layout/main-layout.component';
+import {LoginLayoutComponent} from './layouts/login-layout/login-layout.component';
+import {LoginComponent} from './login/login.component';
+import {MainComponent} from './main/main.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: MainLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {path: '', component: MainComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER']}}
+    ]
+  },
+  {
+    path: '',
+    component: LoginLayoutComponent,
+    children: [
+      {path: 'login', component: LoginComponent}
+    ]
+  },
+  {path: '**', redirectTo: ''}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

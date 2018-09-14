@@ -1,0 +1,17 @@
+<form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+  <h3>Вход</h3>
+  <div>
+    <label>
+      Логин:
+      <input type="text" name="username" required [(ngModel)]="credentials.username">
+    </label>
+  </div>
+  <div>
+    <label>
+      Пароль:
+      <input type="password" name="password" required [(ngModel)]="credentials.password">
+    </label>
+  </div>
+  <button type="submit" [disabled]="!loginForm.form.valid">Вход</button>
+  <p *ngIf="errorMessage">Ошибка аутентификации</p>
+</form>

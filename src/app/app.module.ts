@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {JwtModule} from '@auth0/angular-jwt';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {NgHttpLoaderModule} from 'ng-http-loader';
 import {AlertModule} from 'ngx-bootstrap/alert';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -41,6 +42,7 @@ export function tokenGetter() {
     }),
     FormsModule,
     HttpClientModule,
+    NgHttpLoaderModule,
     AlertModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],

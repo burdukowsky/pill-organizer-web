@@ -1,17 +1,14 @@
-<form #loginForm="ngForm" (ngSubmit)="onSubmit()">
-  <h3>Вход</h3>
-  <div>
-    <label>
-      Логин:
-      <input type="text" name="username" required [(ngModel)]="credentials.username">
-    </label>
-  </div>
-  <div>
-    <label>
-      Пароль:
-      <input type="password" name="password" required [(ngModel)]="credentials.password">
-    </label>
-  </div>
-  <button type="submit" [disabled]="!loginForm.form.valid">Вход</button>
-  <p *ngIf="errorMessage">Ошибка аутентификации</p>
-</form>
+<div class="form-signin-wrapper">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="form-signin">
+    <h1 class="h3 mb-3 font-weight-normal">Аутентификация</h1>
+    <alert type="danger" *ngIf="errorMessage">Ошибка аутентификации</alert>
+    <label for="loginInputUsername" class="sr-only">Логин</label>
+    <input type="text" id="loginInputUsername" name="username" class="form-control" placeholder="Логин"
+           required autofocus [(ngModel)]="credentials.username">
+    <label for="loginInputPassword" class="sr-only">Пароль</label>
+    <input type="password" id="loginInputPassword" name="password" class="form-control" placeholder="Пароль"
+           required [(ngModel)]="credentials.password">
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid">Вход</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
+  </form>
+</div>

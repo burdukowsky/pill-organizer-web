@@ -6,6 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgHttpLoaderModule} from 'ng-http-loader';
 import {AlertModule} from 'ngx-bootstrap/alert';
 
+import {SharedModule} from './shared/shared.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {globals} from './globals';
@@ -32,6 +33,7 @@ export function tokenGetter() {
     HeaderComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     JwtModule.forRoot({

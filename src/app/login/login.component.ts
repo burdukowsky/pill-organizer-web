@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.credentials.username = this.credentials.username.trim();
+    this.credentials.password = this.credentials.password.trim();
     this.authService.login(this.credentials).subscribe(
       (response: HttpResponse<any>) => {
         const authorizationHeader: string = response.headers.get('Authorization');

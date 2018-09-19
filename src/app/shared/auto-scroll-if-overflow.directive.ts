@@ -31,7 +31,7 @@ export class AutoScrollIfOverflowDirective implements OnInit {
       scrollAmount += step;
       if (scrollAmount >= distance) {
         window.clearInterval(interval);
-        completeCallback();
+        setTimeout(completeCallback, 1000);
       }
     }, speed);
   }

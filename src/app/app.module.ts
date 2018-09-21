@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NgHttpLoaderModule} from 'ng-http-loader';
 import {FilterPipeModule} from 'ngx-filter-pipe';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AlertModule} from 'ngx-bootstrap/alert';
 
 import {SharedModule} from './shared/shared.module';
@@ -47,6 +48,7 @@ export function tokenGetter() {
     HttpClientModule,
     NgHttpLoaderModule,
     FilterPipeModule,
+    FontAwesomeModule,
     AlertModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],

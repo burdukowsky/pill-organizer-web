@@ -25,6 +25,7 @@
     "core-js": "^2.5.4",
     "ng-http-loader": "^3.0.0",
     "ngx-bootstrap": "^3.0.1",
+    "ngx-filter-pipe": "^2.1.2",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },

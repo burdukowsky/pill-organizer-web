@@ -4,6 +4,7 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NgHttpLoaderModule} from 'ng-http-loader';
+import {FilterPipeModule} from 'ngx-filter-pipe';
 import {AlertModule} from 'ngx-bootstrap/alert';
 
 import {SharedModule} from './shared/shared.module';
@@ -45,6 +46,7 @@ export function tokenGetter() {
     FormsModule,
     HttpClientModule,
     NgHttpLoaderModule,
+    FilterPipeModule,
     AlertModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],

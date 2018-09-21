@@ -1,3 +1,30 @@
-<p>
-  main works!
-</p>
+<alert type="danger" *ngIf="loadErrorMessage">Ошибка получения данных</alert>
+
+<table class="table" *ngIf="!loadErrorMessage">
+  <thead>
+    <tr>
+      <th scope="col">Лекарство</th>
+      <th scope="col">Место</th>
+    </tr>
+    <tr>
+      <th>
+        <input type="text" class="form-control" [(ngModel)]="pillPlaceFilter.pill.name"
+               title="Введите название лекарства">
+      </th>
+      <th>
+        <input type="text" class="form-control" [(ngModel)]="pillPlaceFilter.place.name"
+               title="Введите название места">
+      </th>
+    </tr>
+  </thead>
+  <tr *ngFor="let pillPlace of pillsPlaces | filterBy: pillPlaceFilter">
+    <td>{{pillPlace.pill.name}}</td>
+    <td>{{pillPlace.place.name}}</td>
+  </tr>
+  <tr>
+    <td colspan="2" *ngIf="(pillsPlaces | filterBy: pillPlaceFilter).length === 0"
+        class="text-center font-italic">
+      Нет совпадений
+    </td>
+  </tr>
+</table>

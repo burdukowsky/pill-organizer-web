@@ -7,6 +7,7 @@ import {NgHttpLoaderModule} from 'ng-http-loader';
 import {FilterPipeModule} from 'ngx-filter-pipe';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AlertModule} from 'ngx-bootstrap/alert';
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 import {SharedModule} from './shared/shared.module';
 import {AppRoutingModule} from './app-routing.module';
@@ -49,7 +50,8 @@ export function tokenGetter() {
     NgHttpLoaderModule,
     FilterPipeModule,
     FontAwesomeModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

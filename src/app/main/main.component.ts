@@ -1,10 +1,14 @@
 import {Component, OnInit} from '@angular/core';
+import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 import {PillService} from './pill.service';
 import {PlaceService} from './place.service';
 import {Pill} from './pill';
 import {Place} from './place';
 import {PillPlace, createEmptyPillPlace} from './pill-place';
+import {RequestFailedModalComponent} from '../shared/request-failed-modal/request-failed-modal.component';
+import {ConfirmModalComponent} from '../shared/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-main',
@@ -17,8 +21,10 @@ export class MainComponent implements OnInit {
   pillsPlaces: Array<PillPlace> = [];
   pillPlaceFilter: PillPlace = createEmptyPillPlace();
   loadErrorMessage: boolean;
+  faTrash = faTrash;
+  bsModalRef: BsModalRef;
 
-  constructor(private pillService: PillService, private placeService: PlaceService) {
+  constructor(private pillService: PillService, private placeService: PlaceService, private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -43,6 +49,26 @@ export class MainComponent implements OnInit {
     }, e => {
       console.error(e);
       this.loadErrorMessage = true;
+    });
+  }
+
+  confirmDeletePillPlace(pillPlace: PillPlace) {
+    this.bsModalRef = this.modalService.show(ConfirmModalComponent, {
+      class: 'modal-sm',
+      initialState: {
+        confirm: () => {
+          this.deletePillPlace(pillPlace);
+        }
+      }
+    });
+  }
+
+  deletePillPlace(pillPlace: PillPlace) {
+    this.placeService.deletePillPlace(pillPlace.place.id, pillPlace.pill.id).subscribe(() => {
+      this.pillsPlaces.splice(this.pillsPlaces.indexOf(pillPlace), 1);
+    }, e => {
+      console.error(e);
+      this.bsModalRef = this.modalService.show(RequestFailedModalComponent);
     });
   }
 

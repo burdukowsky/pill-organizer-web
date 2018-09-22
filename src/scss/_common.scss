@@ -5,3 +5,11 @@ html, body {
 body {
   background-color: $bg-color;
 }
+
+.modal-header-danger {
+  @include border-top-radius(0.25em);
+  @extend .bg-danger;
+  * {
+    color: $white;
+  }
+}

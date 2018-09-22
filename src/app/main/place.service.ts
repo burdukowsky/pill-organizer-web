@@ -16,4 +16,8 @@ export class PlaceService {
   getPlaces(): Observable<Array<Place>> {
     return this.http.get<Array<Place>>(`${environment.api}/places`);
   }
+
+  deletePillPlace(placeId: number, pillId: number): Observable<any> {
+    return this.http.delete(`${environment.api}/places/${placeId}/pills/${pillId}`);
+  }
 }

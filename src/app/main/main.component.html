@@ -5,6 +5,7 @@
     <tr>
       <th scope="col">Лекарство</th>
       <th scope="col">Место</th>
+      <th scope="col" class="text-center">Удалить</th>
     </tr>
     <tr>
       <th>
@@ -20,9 +21,14 @@
   <tr *ngFor="let pillPlace of pillsPlaces | filterBy: pillPlaceFilter">
     <td>{{pillPlace.pill.name}}</td>
     <td>{{pillPlace.place.name}}</td>
+    <td class="text-center align-middle">
+      <button type="button" class="btn btn-danger" (click)="confirmDeletePillPlace(pillPlace)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+    </td>
   </tr>
   <tr>
-    <td colspan="2" *ngIf="(pillsPlaces | filterBy: pillPlaceFilter).length === 0"
+    <td colspan="3" *ngIf="(pillsPlaces | filterBy: pillPlaceFilter).length === 0"
         class="text-center font-italic">
       Нет совпадений
     </td>

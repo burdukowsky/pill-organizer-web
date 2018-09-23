@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faTrash, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 import {PillService} from './pill.service';
@@ -22,6 +22,7 @@ export class MainComponent implements OnInit {
   pillPlaceFilter: PillPlace = createEmptyPillPlace();
   loadErrorMessage: boolean;
   faTrash = faTrash;
+  faPlus = faPlus;
   bsModalRef: BsModalRef;
 
   constructor(private pillService: PillService, private placeService: PlaceService, private modalService: BsModalService) {

@@ -1,0 +1,3 @@
+#mainLayoutContainer {
+  min-height: calc(100% - #{$nav-link-height + $nav-link-padding-y * 2});
+}

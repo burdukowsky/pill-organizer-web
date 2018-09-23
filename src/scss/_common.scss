@@ -13,3 +13,24 @@ body {
     color: $white;
   }
 }
+
+.btn-circle {
+  width: $btn-circle-side;
+  height: $btn-circle-side;
+  border-radius: 50%;
+  padding: 0;
+  &.btn-sm {
+    width: $btn-circle-side-sm;
+    height: $btn-circle-side-sm;
+  }
+  &.btn-lg {
+    width: $btn-circle-side-lg;
+    height: $btn-circle-side-lg;
+  }
+}
+
+.btn-floating {
+  position: fixed;
+  right: 24px;
+  bottom: 45px;
+}

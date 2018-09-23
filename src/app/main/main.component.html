@@ -1,36 +1,41 @@
 <alert type="danger" *ngIf="loadErrorMessage">Ошибка получения данных</alert>
 
-<table class="table" *ngIf="!loadErrorMessage">
-  <thead>
-    <tr>
-      <th scope="col">Лекарство</th>
-      <th scope="col">Место</th>
-      <th scope="col" class="text-center">Удалить</th>
+<ng-container *ngIf="!loadErrorMessage">
+  <button type="button" class="btn btn-primary btn-circle btn-lg btn-floating" title="Добавить">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Лекарство</th>
+        <th scope="col">Место</th>
+        <th scope="col" class="text-center">Удалить</th>
+      </tr>
+      <tr>
+        <th>
+          <input type="text" class="form-control" [(ngModel)]="pillPlaceFilter.pill.name"
+                 title="Введите название лекарства">
+        </th>
+        <th>
+          <input type="text" class="form-control" [(ngModel)]="pillPlaceFilter.place.name"
+                 title="Введите название места">
+        </th>
+      </tr>
+    </thead>
+    <tr *ngFor="let pillPlace of pillsPlaces | filterBy: pillPlaceFilter">
+      <td>{{pillPlace.pill.name}}</td>
+      <td>{{pillPlace.place.name}}</td>
+      <td class="text-center align-middle">
+        <button type="button" class="btn btn-danger" (click)="confirmDeletePillPlace(pillPlace)">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
+      </td>
     </tr>
     <tr>
-      <th>
-        <input type="text" class="form-control" [(ngModel)]="pillPlaceFilter.pill.name"
-               title="Введите название лекарства">
-      </th>
-      <th>
-        <input type="text" class="form-control" [(ngModel)]="pillPlaceFilter.place.name"
-               title="Введите название места">
-      </th>
+      <td colspan="3" *ngIf="(pillsPlaces | filterBy: pillPlaceFilter).length === 0"
+          class="text-center font-italic">
+        Нет совпадений
+      </td>
     </tr>
-  </thead>
-  <tr *ngFor="let pillPlace of pillsPlaces | filterBy: pillPlaceFilter">
-    <td>{{pillPlace.pill.name}}</td>
-    <td>{{pillPlace.place.name}}</td>
-    <td class="text-center align-middle">
-      <button type="button" class="btn btn-danger" (click)="confirmDeletePillPlace(pillPlace)">
-        <fa-icon [icon]="faTrash"></fa-icon>
-      </button>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="3" *ngIf="(pillsPlaces | filterBy: pillPlaceFilter).length === 0"
-        class="text-center font-italic">
-      Нет совпадений
-    </td>
-  </tr>
-</table>
+  </table>
+</ng-container>

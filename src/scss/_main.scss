@@ -1,0 +1,5 @@
+#pillsPlacesTable {
+  @include media-breakpoint-down(xs) {
+    font-size: smaller;
+  }
+}

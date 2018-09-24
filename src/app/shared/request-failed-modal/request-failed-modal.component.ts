@@ -8,6 +8,7 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./request-failed-modal.component.scss']
 })
 export class RequestFailedModalComponent implements OnInit {
+  message = 'Ошибка запроса.';
   faTimes = faTimes;
 
   constructor(public bsModalRef: BsModalRef) {

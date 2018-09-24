@@ -5,5 +5,5 @@ export interface Pill {
 }
 
 export function createEmptyPill(): Pill {
-  return {id: null, name: null, description: null};
+  return {id: null, name: '', description: ''};
 }

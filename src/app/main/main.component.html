@@ -1,9 +1,6 @@
 <alert type="danger" *ngIf="loadErrorMessage">Ошибка получения данных</alert>
 
 <ng-container *ngIf="!loadErrorMessage">
-  <button type="button" class="btn btn-primary btn-circle btn-lg btn-floating" title="Добавить">
-    <fa-icon [icon]="faPlus"></fa-icon>
-  </button>
   <table class="table">
     <thead>
       <tr>
@@ -38,4 +35,52 @@
       </td>
     </tr>
   </table>
+
+  <button type="button" class="btn btn-primary btn-circle btn-lg btn-floating" title="Добавить"
+          (click)="openAddPillPlaceModal(addPillPlaceModalTemplate)">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </button>
+
+  <ng-template #addPillPlaceModalTemplate>
+    <div class="modal-header">
+      <h5 class="modal-title">Добавить элемент</h5>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="addPillPlaceModalRef.hide()">
+        <span aria-hidden="true"><fa-icon [icon]="faTimes"></fa-icon></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="addPillPlaceForm" #addPillPlaceForm="ngForm" autocomplete="off"
+            (ngSubmit)="onAddPillPlaceFormSubmit()">
+        <div class="form-group">
+          <label for="addPillPlacePillInput">Лекарство</label>
+          <input class="form-control" id="addPillPlacePillInput" name="newPill" required
+                 placeholder="Введите название лекарства"
+                 [typeahead]="pills" typeaheadOptionField="name" [typeaheadScrollable]="true"
+                 [typeaheadOptionsInScrollableView]="5" [(ngModel)]="newPillInputValue" #newPill="ngModel"
+                 (typeaheadOnSelect)="onSelectNewPill($event)">
+          <small class="form-text text-muted" *ngIf="newPill.valid && needCreateNewPill">
+            Будет создано новое лекарство
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="addPillPlacePlaceInput">Место</label>
+          <input class="form-control" id="addPillPlacePlaceInput" name="newPlace" required
+                 placeholder="Введите название места"
+                 [typeahead]="places" typeaheadOptionField="name" [typeaheadScrollable]="true"
+                 [typeaheadOptionsInScrollableView]="5" [(ngModel)]="newPlaceInputValue" #newPlace="ngModel"
+                 (typeaheadOnSelect)="onSelectNewPlace($event)">
+          <small class="form-text text-muted" *ngIf="newPlace.valid && needCreateNewPlace">
+            Будет создано новое место
+          </small>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-warning" (click)="resetAddPillPlaceForm()">Сбросить</button>
+      <button type="submit" class="btn btn-primary" form="addPillPlaceForm" [disabled]="!addPillPlaceForm.form.valid">
+        <fa-icon [icon]="faPaperPlane"></fa-icon>
+        Отправить
+      </button>
+    </div>
+  </ng-template>
 </ng-container>

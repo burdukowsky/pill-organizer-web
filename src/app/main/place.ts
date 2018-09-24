@@ -8,5 +8,5 @@ export interface Place {
 }
 
 export function createEmptyPlace(): Place {
-  return {id: null, name: null, description: null, pills: []};
+  return {id: null, name: '', description: '', pills: []};
 }

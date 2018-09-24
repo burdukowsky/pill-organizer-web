@@ -8,6 +8,7 @@ import {FilterPipeModule} from 'ngx-filter-pipe';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AlertModule} from 'ngx-bootstrap/alert';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
 
 import {SharedModule} from './shared/shared.module';
 import {AppRoutingModule} from './app-routing.module';
@@ -51,7 +52,8 @@ export function tokenGetter() {
     FilterPipeModule,
     FontAwesomeModule,
     AlertModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

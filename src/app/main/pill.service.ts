@@ -16,4 +16,8 @@ export class PillService {
   getPills(): Observable<Array<Pill>> {
     return this.http.get<Array<Pill>>(`${environment.api}/pills`);
   }
+
+  createPill(pill: Pill): Observable<Pill> {
+    return this.http.post<Pill>(`${environment.api}/pills`, pill);
+  }
 }

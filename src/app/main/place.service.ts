@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 
 import {Place} from './place';
 import {environment} from '../../environments/environment';
+import {PillPlace} from './pill-place';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,13 @@ export class PlaceService {
 
   deletePillPlace(placeId: number, pillId: number): Observable<any> {
     return this.http.delete(`${environment.api}/places/${placeId}/pills/${pillId}`);
+  }
+
+  createPlace(place: Place): Observable<Place> {
+    return this.http.post<Place>(`${environment.api}/places`, place);
+  }
+
+  createPillPlace(pillPlace: PillPlace): Observable<Place> {
+    return this.http.post<Place>(`${environment.api}/places/${pillPlace.place.id}/pills`, pillPlace.pill);
   }
 }

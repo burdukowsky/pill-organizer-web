@@ -34,3 +34,10 @@ body {
   right: 24px;
   bottom: 45px;
 }
+
+.cursor-pointer {
+  cursor: pointer !important;
+  * {
+    @extend .cursor-pointer;
+  }
+}

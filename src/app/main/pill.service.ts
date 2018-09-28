@@ -20,4 +20,8 @@ export class PillService {
   createPill(pill: Pill): Observable<Pill> {
     return this.http.post<Pill>(`${environment.api}/pills`, pill);
   }
+
+  updatePill(pill: Pill): Observable<Pill> {
+    return this.http.put<Pill>(`${environment.api}/pills/${pill.id}`, pill);
+  }
 }

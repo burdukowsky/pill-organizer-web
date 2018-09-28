@@ -94,7 +94,21 @@ export class PillsComponent implements OnInit {
         console.error(e);
       });
     } else {
-      // TODO: implement updating pill
+      this.pillService.updatePill(this.editablePill).subscribe(updatedPill => {
+        const indexOfUpdatedPill = this.pills.findIndex((pill => pill.id === updatedPill.id));
+        if (indexOfUpdatedPill !== -1) {
+          this.pills[indexOfUpdatedPill] = updatedPill;
+        }
+        this.pillModalRef.hide();
+        this.resetPillForm();
+      }, e => {
+        this.requestFailedModalRef = this.modalService.show(RequestFailedModalComponent, {
+          initialState: {
+            message: 'Ошибка обновления лекарства.'
+          }
+        });
+        console.error(e);
+      });
     }
   }
 

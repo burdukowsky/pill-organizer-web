@@ -22,6 +22,8 @@ import {LoginLayoutComponent} from './layouts/login-layout/login-layout.componen
 import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 import {HeaderComponent} from './layout-elements/header/header.component';
+import {PillsComponent} from './pills/pills.component';
+import {PlacesComponent} from './places/places.component';
 
 export function tokenGetter() {
   return localStorage.getItem(globals.localStorageKeys.accessToken);
@@ -34,7 +36,9 @@ export function tokenGetter() {
     LoginLayoutComponent,
     LoginComponent,
     MainComponent,
-    HeaderComponent
+    HeaderComponent,
+    PillsComponent,
+    PlacesComponent
   ],
   imports: [
     SharedModule,

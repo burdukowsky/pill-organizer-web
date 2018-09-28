@@ -41,3 +41,9 @@ body {
     @extend .cursor-pointer;
   }
 }
+
+@include media-breakpoint-down(xs) {
+  .text-smaller-xs {
+    font-size: smaller;
+  }
+}

@@ -1,0 +1,84 @@
+<alert type="danger" *ngIf="loadErrorMessage">Ошибка получения данных</alert>
+
+<ng-container *ngIf="!loadErrorMessage">
+  <div class="table-responsive">
+    <table class="table text-smaller-xs">
+      <thead>
+        <tr>
+          <th scope="col">Название</th>
+          <th scope="col">Описание</th>
+          <th scope="col" class="text-center">Действия</th>
+        </tr>
+        <tr>
+          <th>
+            <input type="text" class="form-control" [(ngModel)]="pillFilter.name"
+                   title="Фильтр по названию лекарства">
+          </th>
+          <th>
+            <input type="text" class="form-control" [(ngModel)]="pillFilter.description"
+                   title="Фильтр по названию места">
+          </th>
+        </tr>
+      </thead>
+      <tr *ngFor="let pill of pills | filterBy: pillFilter">
+        <td>{{pill.name}}</td>
+        <td>{{pill.description}}</td>
+        <td class="text-center align-middle">
+          <button type="button" class="btn btn-default m-1" (click)="startEditPill(pill)">
+            <fa-icon [icon]="faPen"></fa-icon>
+          </button>
+          <button type="button" class="btn btn-danger m-1" (click)="confirmDeletePill(pill)">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" *ngIf="(pills | filterBy: pillFilter).length === 0"
+            class="text-center font-italic">
+          Нет совпадений
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <button type="button" class="btn btn-primary btn-circle btn-lg btn-floating" title="Добавить"
+          (click)="startAddPill()">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </button>
+
+  <ng-template #pillModalTemplate>
+    <div class="modal-header">
+      <h5 class="modal-title" [ngSwitch]="isAdding">
+        <span *ngSwitchCase="true">Добавить лекарство</span>
+        <span *ngSwitchDefault>Редактировать лекарство</span>
+      </h5>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="pillModalRef.hide()">
+        <span aria-hidden="true"><fa-icon [icon]="faTimes"></fa-icon></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="pillForm" #pillForm="ngForm" autocomplete="off" (ngSubmit)="onPillFormSubmit()">
+        <div class="form-group">
+          <label for="pillFormNameInput">Название</label>
+          <input class="form-control" id="pillFormNameInput" name="name" required
+                 placeholder="Введите название лекарства" [(ngModel)]="editablePill.name">
+          <small class="bg-warning text-dark rounded d-inline-block px-2 py-1 my-1"
+                 *ngIf="showPillWithThisNameExistsMessage">
+            Лекарство с таким названием уже есть
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="pillFormDescriptionInput">Описание</label>
+          <input class="form-control" id="pillFormDescriptionInput" name="description"
+                 placeholder="Опишите лекарство" [(ngModel)]="editablePill.description">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" form="pillForm" [disabled]="!pillForm.form.valid">
+        <fa-icon [icon]="faPaperPlane"></fa-icon>
+        Отправить
+      </button>
+    </div>
+  </ng-template>
+</ng-container>

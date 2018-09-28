@@ -2,18 +2,18 @@
   <div class="container pl-3 pr-3">
     <span class="navbar-text w-100" appAutoScrollIfOverflow>Вы вошли как {{username}}</span>
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" title="Поиск лекарства">
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link" title="Поиск лекарства" routerLink="/">
           <fa-icon [icon]="faSearch"></fa-icon>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" title="База лекарств">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" title="База лекарств" routerLink="/pills">
           <fa-icon [icon]="faPills"></fa-icon>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" title="База мест">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" title="База мест" routerLink="/places">
           <fa-icon [icon]="faMedkit"></fa-icon>
         </a>
       </li>

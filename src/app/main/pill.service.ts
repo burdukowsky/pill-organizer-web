@@ -24,4 +24,8 @@ export class PillService {
   updatePill(pill: Pill): Observable<Pill> {
     return this.http.put<Pill>(`${environment.api}/pills/${pill.id}`, pill);
   }
+
+  deletePill(pillId: number): Observable<any> {
+    return this.http.delete<any>(`${environment.api}/pills/${pillId}`);
+  }
 }

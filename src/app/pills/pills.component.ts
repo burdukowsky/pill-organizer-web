@@ -66,7 +66,16 @@ export class PillsComponent implements OnInit {
   }
 
   deletePill(pill) {
-    // TODO: implement deleting pill
+    this.pillService.deletePill(pill.id).subscribe(() => {
+      this.pills.splice(this.pills.indexOf(pill), 1);
+    }, e => {
+      this.requestFailedModalRef = this.modalService.show(RequestFailedModalComponent, {
+        initialState: {
+          message: 'Ошибка удаления лекарства.'
+        }
+      });
+      console.error(e);
+    });
   }
 
   startEditPill(pill: Pill) {

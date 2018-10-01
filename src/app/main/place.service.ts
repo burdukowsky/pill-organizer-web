@@ -29,4 +29,8 @@ export class PlaceService {
   createPillPlace(pillPlace: PillPlace): Observable<Place> {
     return this.http.post<Place>(`${environment.api}/places/${pillPlace.place.id}/pills`, pillPlace.pill);
   }
+
+  updatePlace(place: Place): Observable<Place> {
+    return this.http.put<Place>(`${environment.api}/places/${place.id}`, place);
+  }
 }

@@ -94,7 +94,21 @@ export class PlacesComponent implements OnInit {
         console.error(e);
       });
     } else {
-      // TODO: implement
+      this.placeService.updatePlace(this.editablePlace).subscribe(updatedPlace => {
+        const indexOfUpdatedPlace = this.places.findIndex((place => place.id === updatedPlace.id));
+        if (indexOfUpdatedPlace !== -1) {
+          this.places[indexOfUpdatedPlace] = updatedPlace;
+        }
+        this.placeModalRef.hide();
+        this.resetPlaceForm();
+      }, e => {
+        this.requestFailedModalRef = this.modalService.show(RequestFailedModalComponent, {
+          initialState: {
+            message: 'Ошибка обновления места.'
+          }
+        });
+        console.error(e);
+      });
     }
   }
 

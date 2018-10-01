@@ -33,4 +33,8 @@ export class PlaceService {
   updatePlace(place: Place): Observable<Place> {
     return this.http.put<Place>(`${environment.api}/places/${place.id}`, place);
   }
+
+  deletePlace(placeId: number): Observable<any> {
+    return this.http.delete<any>(`${environment.api}/places/${placeId}`);
+  }
 }

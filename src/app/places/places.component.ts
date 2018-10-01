@@ -66,7 +66,16 @@ export class PlacesComponent implements OnInit {
   }
 
   deletePlace(place: Place) {
-    // TODO: implement
+    this.placeService.deletePlace(place.id).subscribe(() => {
+      this.places.splice(this.places.indexOf(place), 1);
+    }, e => {
+      this.requestFailedModalRef = this.modalService.show(RequestFailedModalComponent, {
+        initialState: {
+          message: 'Ошибка удаления места.'
+        }
+      });
+      console.error(e);
+    });
   }
 
   startEditPlace(place: Place) {

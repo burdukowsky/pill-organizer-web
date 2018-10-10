@@ -65,7 +65,7 @@ export class PillsComponent implements OnInit {
     });
   }
 
-  deletePill(pill) {
+  deletePill(pill: Pill) {
     this.pillService.deletePill(pill.id).subscribe(() => {
       this.pills.splice(this.pills.indexOf(pill), 1);
     }, e => {

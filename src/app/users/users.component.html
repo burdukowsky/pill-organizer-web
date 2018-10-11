@@ -49,7 +49,7 @@
         <div class="form-group">
           <label for="userFormUsernameInput">Логин</label>
           <input class="form-control" id="userFormUsernameInput" name="username" #username="ngModel" required
-                 placeholder="Введите логин" [(ngModel)]="editableUser.username"
+                 placeholder="Введите логин" type="text" [(ngModel)]="editableUser.username"
                  [appBlackList]="blackList" [appBlackListStrict]="false">
           <small class="bg-warning text-dark rounded d-inline-block px-2 py-1 my-1"
                  *ngIf="username.hasError('blackList')">
@@ -59,7 +59,7 @@
         <div class="form-group">
           <label for="userFormPasswordInput">Пароль</label>
           <input class="form-control" id="userFormPasswordInput" name="password" required="{{isAdding}}"
-                 placeholder="Введите пароль" [(ngModel)]="editableUser.password">
+                 placeholder="Введите пароль" type="password" [(ngModel)]="editableUser.password">
           <small class="form-text text-muted" *ngIf="!isAdding">Если оставить поле пустым, пароль не изменится.</small>
         </div>
         <div class="form-group">

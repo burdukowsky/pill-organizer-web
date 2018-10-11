@@ -8,6 +8,7 @@ import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 import {PillsComponent} from './pills/pills.component';
 import {PlacesComponent} from './places/places.component';
+import {UsersComponent} from './users/users.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,8 @@ const routes: Routes = [
     children: [
       {path: '', component: MainComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER']}},
       {path: 'pills', component: PillsComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER']}},
-      {path: 'places', component: PlacesComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER']}}
+      {path: 'places', component: PlacesComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER']}},
+      {path: 'users', component: UsersComponent, canActivate: [AuthGuard], data: {roles: ['ADMIN']}}
     ]
   },
   {

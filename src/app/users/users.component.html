@@ -1,0 +1,82 @@
+<alert type="danger" *ngIf="loadErrorMessage">Ошибка получения данных</alert>
+
+<ng-container *ngIf="!loadErrorMessage">
+  <div class="table-responsive">
+    <table class="table text-smaller-xs">
+      <thead>
+        <tr>
+          <th scope="col">Логин</th>
+          <th scope="col">Роли</th>
+          <th scope="col" class="text-center">Действия</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let user of users">
+        <td>{{user.username}}</td>
+        <td>
+          <span *ngFor="let role of user.roles; let isLast = last">
+            {{role.name}}{{isLast ? '' : ', '}}
+          </span>
+        </td>
+        <td class="text-center align-middle">
+          <button type="button" class="btn btn-default m-1" (click)="startEditUser(user)">
+            <fa-icon [icon]="faPen"></fa-icon>
+          </button>
+          <button type="button" class="btn btn-danger m-1" (click)="confirmDeleteUser(user)">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <button type="button" class="btn btn-primary btn-circle btn-lg btn-floating" title="Добавить"
+          (click)="startAddUser()">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </button>
+
+  <ng-template #userModalTemplate>
+    <div class="modal-header">
+      <h5 class="modal-title" [ngSwitch]="isAdding">
+        <span *ngSwitchCase="true">Добавить пользователя</span>
+        <span *ngSwitchDefault>Редактировать пользователя</span>
+      </h5>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="userModalRef.hide()">
+        <span aria-hidden="true"><fa-icon [icon]="faTimes"></fa-icon></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="userForm" #userForm="ngForm" autocomplete="off" (ngSubmit)="onUserFormSubmit()">
+        <div class="form-group">
+          <label for="userFormUsernameInput">Логин</label>
+          <input class="form-control" id="userFormUsernameInput" name="username" #username="ngModel" required
+                 placeholder="Введите логин" [(ngModel)]="editableUser.username"
+                 [appBlackList]="blackList" [appBlackListStrict]="false">
+          <small class="bg-warning text-dark rounded d-inline-block px-2 py-1 my-1"
+                 *ngIf="username.hasError('blackList')">
+            Логин занят
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="userFormPasswordInput">Пароль</label>
+          <input class="form-control" id="userFormPasswordInput" name="password" required="{{isAdding}}"
+                 placeholder="Введите пароль" [(ngModel)]="editableUser.password">
+          <small class="form-text text-muted" *ngIf="!isAdding">Если оставить поле пустым, пароль не изменится.</small>
+        </div>
+        <div class="form-group">
+          <label>Роли</label>
+          <div class="custom-control custom-checkbox" *ngFor="let role of roles">
+            <input class="custom-control-input" type="checkbox" id="role_{{role.name}}" value="{{role}}"
+                   (change)="onRoleCheck(role)" [checked]="roleExists(role)">
+            <label class="custom-control-label" for="role_{{role.name}}">{{role.name}}</label>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" form="userForm" [disabled]="!userForm.form.valid">
+        <fa-icon [icon]="faPaperPlane"></fa-icon>
+        Отправить
+      </button>
+    </div>
+  </ng-template>
+</ng-container>

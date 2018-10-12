@@ -3,6 +3,7 @@ import {faTrash, faPlus, faTimes, faPaperPlane} from '@fortawesome/free-solid-sv
 import {BsModalRef, BsModalService, TypeaheadMatch} from 'ngx-bootstrap';
 import {forkJoin, Observable, of} from 'rxjs';
 import {tap} from 'rxjs/operators';
+import {trim} from 'lodash';
 
 import {PillService} from './pill.service';
 import {PlaceService} from './place.service';
@@ -103,7 +104,7 @@ export class MainComponent implements OnInit {
 
     if (this.needCreateNewPill) {
       const newPill = createEmptyPill();
-      newPill.name = this.newPillInputValue;
+      newPill.name = trim(this.newPillInputValue);
       requests.push(this.pillService.createPill(newPill).pipe(tap(createdPill => {
         this.pills.push(createdPill);
         pillForCreatingPillPlace = createdPill;
@@ -119,7 +120,7 @@ export class MainComponent implements OnInit {
 
     if (this.needCreateNewPlace) {
       const newPlace = createEmptyPlace();
-      newPlace.name = this.newPlaceInputValue;
+      newPlace.name = trim(this.newPlaceInputValue);
       requests.push(this.placeService.createPlace(newPlace).pipe(tap(createdPlace => {
         this.places.push(createdPlace);
         placeForCreatingPillPlace = createdPlace;

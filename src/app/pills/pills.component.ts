@@ -1,7 +1,7 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {faTrash, faPen, faPlus, faTimes, faPaperPlane} from '@fortawesome/free-solid-svg-icons';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {clone} from 'lodash';
+import {clone, trim} from 'lodash';
 
 import {Pill, createEmptyPill} from '../main/pill';
 import {PillService} from '../main/pill.service';
@@ -89,6 +89,8 @@ export class PillsComponent implements OnInit {
   }
 
   onPillFormSubmit() {
+    this.editablePill.name = trim(this.editablePill.name);
+    this.editablePill.description = trim(this.editablePill.description);
     if (this.isAdding) {
       this.pillService.createPill(this.editablePill).subscribe(createdPill => {
         this.pills.push(createdPill);

@@ -1,7 +1,7 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {faPaperPlane, faPen, faPlus, faTimes, faTrash} from '@fortawesome/free-solid-svg-icons';
-import {cloneDeep} from 'lodash';
+import {cloneDeep, trim} from 'lodash';
 
 import {User, createEmptyUser} from './user';
 import {UserService} from './user.service';
@@ -93,6 +93,8 @@ export class UsersComponent implements OnInit {
   }
 
   onUserFormSubmit() {
+    this.editableUser.username = trim(this.editableUser.username);
+    this.editableUser.password = trim(this.editableUser.password);
     if (this.isAdding) {
       this.userService.createUser(this.editableUser).subscribe(createdUser => {
         this.users.push(createdUser);

@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {faTrash, faPen, faPlus, faTimes, faPaperPlane} from '@fortawesome/free-solid-svg-icons';
-import {clone} from 'lodash';
+import {clone, trim} from 'lodash';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 import {Place, createEmptyPlace} from '../main/place';
@@ -89,6 +89,8 @@ export class PlacesComponent implements OnInit {
   }
 
   onPlaceFormSubmit() {
+    this.editablePlace.name = trim(this.editablePlace.name);
+    this.editablePlace.description = trim(this.editablePlace.description);
     if (this.isAdding) {
       this.placeService.createPlace(this.editablePlace).subscribe(createdPlace => {
         this.places.push(createdPlace);

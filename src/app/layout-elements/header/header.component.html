@@ -17,7 +17,7 @@
           <fa-icon [icon]="faMedkit"></fa-icon>
         </a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" *ngIf="authService.hasRole('ADMIN')">
         <a class="nav-link" title="Пользователи" routerLink="/users">
           <fa-icon [icon]="faUsers"></fa-icon>
         </a>

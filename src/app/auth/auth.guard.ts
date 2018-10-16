@@ -17,7 +17,12 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.loggedIn()) {
       const roles = next.data['roles'] as Array<string>;
-      return (roles === undefined || this.authService.hasAnyRole(roles));
+      const result = (roles === undefined || this.authService.hasAnyRole(roles));
+      if (!result) {
+        this.router.navigateByUrl('/');
+        return false;
+      }
+      return true;
     }
     localStorage.removeItem(globals.localStorageKeys.accessToken);
     this.router.navigate(['login'], {queryParams: {returnUrl: state.url}});

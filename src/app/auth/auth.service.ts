@@ -33,6 +33,15 @@ export class AuthService {
     return !tokenExpired;
   }
 
+  hasRole(role: string): boolean {
+    const token: string = this.jwtHelperService.tokenGetter();
+    if (!token) {
+      return false;
+    }
+    const roles: string[] = this.jwtHelperService.decodeToken(token).roles.split(',');
+    return roles.includes(globals.roleAuthorityPrefix + role);
+  }
+
   hasAnyRole(roles: Array<string>): boolean {
     const token: string = this.jwtHelperService.tokenGetter();
     if (!token) {

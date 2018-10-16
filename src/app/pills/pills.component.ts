@@ -7,6 +7,7 @@ import {Pill, createEmptyPill} from '../main/pill';
 import {PillService} from '../main/pill.service';
 import {ConfirmModalComponent} from '../shared/confirm-modal/confirm-modal.component';
 import {RequestFailedModalComponent} from '../shared/request-failed-modal/request-failed-modal.component';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-pills',
@@ -30,6 +31,8 @@ export class PillsComponent implements OnInit {
   faTimes = faTimes;
   faPaperPlane = faPaperPlane;
 
+  canEdit = this.authService.hasAnyRole(['EDITOR', 'ADMIN']);
+
   get isAdding(): boolean {
     return this.editablePill.id == null;
   }
@@ -40,7 +43,7 @@ export class PillsComponent implements OnInit {
     return this.isAdding && pillWithEditablePillNameExists;
   }
 
-  constructor(private pillService: PillService, private modalService: BsModalService) {
+  constructor(private pillService: PillService, private modalService: BsModalService, private authService: AuthService) {
   }
 
   ngOnInit() {

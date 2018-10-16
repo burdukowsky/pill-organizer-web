@@ -12,6 +12,7 @@ import {Place, createEmptyPlace} from './place';
 import {PillPlace, createEmptyPillPlace} from './pill-place';
 import {RequestFailedModalComponent} from '../shared/request-failed-modal/request-failed-modal.component';
 import {ConfirmModalComponent} from '../shared/confirm-modal/confirm-modal.component';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -37,6 +38,8 @@ export class MainComponent implements OnInit {
   newPillInputValue = '';
   newPlaceInputValue = '';
 
+  canEdit = this.authService.hasAnyRole(['EDITOR', 'ADMIN']);
+
   get needCreateNewPill(): boolean {
     return this.newPill == null || (this.newPill && this.newPillInputValue !== this.newPill.name);
   }
@@ -45,7 +48,10 @@ export class MainComponent implements OnInit {
     return this.newPlace == null || (this.newPlace && this.newPlaceInputValue !== this.newPlace.name);
   }
 
-  constructor(private pillService: PillService, private placeService: PlaceService, private modalService: BsModalService) {
+  constructor(private pillService: PillService,
+              private placeService: PlaceService,
+              private modalService: BsModalService,
+              private authService: AuthService) {
   }
 
   ngOnInit() {

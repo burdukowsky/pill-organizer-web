@@ -7,7 +7,7 @@
         <tr>
           <th scope="col">Лекарство</th>
           <th scope="col">Место</th>
-          <th scope="col" class="text-center">Удалить</th>
+          <th scope="col" class="text-center" *ngIf="canEdit">Удалить</th>
         </tr>
         <tr>
           <th>
@@ -23,7 +23,7 @@
       <tr *ngFor="let pillPlace of pillsPlaces | filterBy: pillPlaceFilter">
         <td>{{pillPlace.pill.name}}</td>
         <td>{{pillPlace.place.name}}</td>
-        <td class="text-center align-middle">
+        <td class="text-center align-middle" *ngIf="canEdit">
           <button type="button" class="btn btn-danger" (click)="confirmDeletePillPlace(pillPlace)">
             <fa-icon [icon]="faTrash"></fa-icon>
           </button>
@@ -38,7 +38,7 @@
     </table>
   </div>
 
-  <button type="button" class="btn btn-primary btn-circle btn-lg btn-floating" title="Добавить"
+  <button type="button" class="btn btn-primary btn-circle btn-lg btn-floating" title="Добавить" *ngIf="canEdit"
           (click)="openAddPillPlaceModal(addPillPlaceModalTemplate)">
     <fa-icon [icon]="faPlus"></fa-icon>
   </button>

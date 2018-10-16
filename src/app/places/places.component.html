@@ -7,7 +7,7 @@
         <tr>
           <th scope="col">Название</th>
           <th scope="col">Описание</th>
-          <th scope="col" class="text-center">Действия</th>
+          <th scope="col" class="text-center" *ngIf="canEdit">Действия</th>
         </tr>
         <tr>
           <th>
@@ -23,7 +23,7 @@
       <tr *ngFor="let place of places | filterBy: placeFilter">
         <td>{{place.name}}</td>
         <td>{{place.description}}</td>
-        <td class="text-center align-middle">
+        <td class="text-center align-middle" *ngIf="canEdit">
           <button type="button" class="btn btn-default m-1" (click)="startEditPlace(place)">
             <fa-icon [icon]="faPen"></fa-icon>
           </button>
@@ -41,7 +41,7 @@
     </table>
   </div>
 
-  <button type="button" class="btn btn-primary btn-circle btn-lg btn-floating" title="Добавить"
+  <button type="button" class="btn btn-primary btn-circle btn-lg btn-floating" title="Добавить" *ngIf="canEdit"
           (click)="startAddPlace()">
     <fa-icon [icon]="faPlus"></fa-icon>
   </button>

@@ -7,6 +7,7 @@ import {Place, createEmptyPlace} from '../main/place';
 import {PlaceService} from '../main/place.service';
 import {ConfirmModalComponent} from '../shared/confirm-modal/confirm-modal.component';
 import {RequestFailedModalComponent} from '../shared/request-failed-modal/request-failed-modal.component';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-places',
@@ -30,6 +31,8 @@ export class PlacesComponent implements OnInit {
   faTimes = faTimes;
   faPaperPlane = faPaperPlane;
 
+  canEdit = this.authService.hasAnyRole(['EDITOR', 'ADMIN']);
+
   get isAdding(): boolean {
     return this.editablePlace.id == null;
   }
@@ -40,7 +43,7 @@ export class PlacesComponent implements OnInit {
     return this.isAdding && placeWithEditablePlaceNameExists;
   }
 
-  constructor(private placeService: PlaceService, private modalService: BsModalService) {
+  constructor(private placeService: PlaceService, private modalService: BsModalService, private authService: AuthService) {
   }
 
   ngOnInit() {

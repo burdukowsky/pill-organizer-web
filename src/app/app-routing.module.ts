@@ -16,9 +16,9 @@ const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      {path: '', component: MainComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER']}},
-      {path: 'pills', component: PillsComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER']}},
-      {path: 'places', component: PlacesComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER']}},
+      {path: '', component: MainComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER', 'EDITOR', 'ADMIN']}},
+      {path: 'pills', component: PillsComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER', 'EDITOR', 'ADMIN']}},
+      {path: 'places', component: PlacesComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER', 'EDITOR', 'ADMIN']}},
       {path: 'users', component: UsersComponent, canActivate: [AuthGuard], data: {roles: ['ADMIN']}}
     ]
   },

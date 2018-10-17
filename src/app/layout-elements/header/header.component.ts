@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {faSignOutAlt, faPills, faMedkit, faSearch, faUsers} from '@fortawesome/free-solid-svg-icons';
+import {faSignOutAlt, faPills, faMedkit, faSearch, faUsers, faUser} from '@fortawesome/free-solid-svg-icons';
 
 import {AuthService} from '../../auth/auth.service';
 
@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   faMedkit = faMedkit;
   faSearch = faSearch;
   faUsers = faUsers;
+  faUser = faUser;
 
   constructor(public authService: AuthService) {
   }

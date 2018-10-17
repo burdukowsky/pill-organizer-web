@@ -9,6 +9,7 @@ import {MainComponent} from './main/main.component';
 import {PillsComponent} from './pills/pills.component';
 import {PlacesComponent} from './places/places.component';
 import {UsersComponent} from './users/users.component';
+import {AccountComponent} from './account/account.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
       {path: '', component: MainComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER', 'EDITOR', 'ADMIN']}},
       {path: 'pills', component: PillsComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER', 'EDITOR', 'ADMIN']}},
       {path: 'places', component: PlacesComponent, canActivate: [AuthGuard], data: {roles: ['VIEWER', 'EDITOR', 'ADMIN']}},
-      {path: 'users', component: UsersComponent, canActivate: [AuthGuard], data: {roles: ['ADMIN']}}
+      {path: 'users', component: UsersComponent, canActivate: [AuthGuard], data: {roles: ['ADMIN']}},
+      {path: 'account', component: AccountComponent}
     ]
   },
   {

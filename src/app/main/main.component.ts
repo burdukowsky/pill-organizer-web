@@ -1,5 +1,5 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
-import {faTrash, faPlus, faTimes, faPaperPlane} from '@fortawesome/free-solid-svg-icons';
+import {faTrash, faPlus, faTimes, faPaperPlane, faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
 import {BsModalRef, BsModalService, TypeaheadMatch} from 'ngx-bootstrap';
 import {forkJoin, Observable, of} from 'rxjs';
 import {tap} from 'rxjs/operators';
@@ -29,6 +29,7 @@ export class MainComponent implements OnInit {
   faPlus = faPlus;
   faTimes = faTimes;
   faPaperPlane = faPaperPlane;
+  faQuestionCircle = faQuestionCircle;
   confirmDeletePillPlaceModalRef: BsModalRef;
   addPillPlaceModalRef: BsModalRef;
   requestFailedModalRef: BsModalRef;

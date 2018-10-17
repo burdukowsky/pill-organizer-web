@@ -9,6 +9,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AlertModule} from 'ngx-bootstrap/alert';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 
 import {SharedModule} from './shared/shared.module';
 import {AppRoutingModule} from './app-routing.module';
@@ -61,7 +62,8 @@ export function tokenGetter() {
     FontAwesomeModule,
     AlertModule.forRoot(),
     ModalModule.forRoot(),
-    TypeaheadModule.forRoot()
+    TypeaheadModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

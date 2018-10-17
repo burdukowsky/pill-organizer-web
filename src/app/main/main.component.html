@@ -21,8 +21,16 @@
         </tr>
       </thead>
       <tr *ngFor="let pillPlace of pillsPlaces | filterBy: pillPlaceFilter">
-        <td>{{pillPlace.pill.name}}</td>
-        <td>{{pillPlace.place.name}}</td>
+        <td>
+          {{pillPlace.pill.name}}
+          <fa-icon [icon]="faQuestionCircle" *ngIf="pillPlace.pill.description"
+                   [tooltip]="pillPlace.pill.description"></fa-icon>
+        </td>
+        <td>
+          {{pillPlace.place.name}}
+          <fa-icon [icon]="faQuestionCircle" *ngIf="pillPlace.place.description"
+                   [tooltip]="pillPlace.place.description"></fa-icon>
+        </td>
         <td class="text-center align-middle" *ngIf="canEdit">
           <button type="button" class="btn btn-danger" (click)="confirmDeletePillPlace(pillPlace)">
             <fa-icon [icon]="faTrash"></fa-icon>

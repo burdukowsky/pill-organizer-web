@@ -22,7 +22,7 @@
       </thead>
       <tr *ngFor="let pill of pills | filterBy: pillFilter">
         <td>{{pill.name}}</td>
-        <td>{{pill.description}}</td>
+        <td class="text-pre-line">{{pill.description}}</td>
         <td class="text-center align-middle" *ngIf="canEdit">
           <button type="button" class="btn btn-default m-1" (click)="startEditPill(pill)">
             <fa-icon [icon]="faPen"></fa-icon>
@@ -69,8 +69,8 @@
         </div>
         <div class="form-group">
           <label for="pillFormDescriptionInput">Описание</label>
-          <input class="form-control" id="pillFormDescriptionInput" name="description"
-                 placeholder="Опишите лекарство" [(ngModel)]="editablePill.description">
+          <textarea class="form-control" id="pillFormDescriptionInput" name="description" rows="5"
+                    placeholder="Опишите лекарство" [(ngModel)]="editablePill.description"></textarea>
         </div>
       </form>
     </div>

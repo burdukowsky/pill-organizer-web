@@ -22,7 +22,7 @@
       </thead>
       <tr *ngFor="let place of places | filterBy: placeFilter">
         <td>{{place.name}}</td>
-        <td>{{place.description}}</td>
+        <td class="text-pre-line">{{place.description}}</td>
         <td class="text-center align-middle" *ngIf="canEdit">
           <button type="button" class="btn btn-default m-1" (click)="startEditPlace(place)">
             <fa-icon [icon]="faPen"></fa-icon>
@@ -69,8 +69,8 @@
         </div>
         <div class="form-group">
           <label for="placeFormDescriptionInput">Описание</label>
-          <input class="form-control" id="placeFormDescriptionInput" name="description"
-                 placeholder="Опишите место" [(ngModel)]="editablePlace.description">
+          <textarea class="form-control" id="placeFormDescriptionInput" name="description" rows="5"
+                    placeholder="Опишите место" [(ngModel)]="editablePlace.description"></textarea>
         </div>
       </form>
     </div>

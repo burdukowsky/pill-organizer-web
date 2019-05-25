@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  api: 'http://localhost:8080',
-  apiWithoutProtocol: 'localhost:8080'
+  api: 'https://rgodxvxfad.ml/pill-organizer-api',
+  apiWithoutProtocol: 'rgodxvxfad.ml'
 };

@@ -24,7 +24,7 @@
         <td>{{pill.name}}</td>
         <td class="text-pre-line">{{pill.description}}</td>
         <td class="text-center align-middle" *ngIf="canEdit">
-          <button type="button" class="btn btn-default m-1" (click)="startEditPill(pill)">
+          <button type="button" class="btn btn-secondary m-1" (click)="startEditPill(pill)">
             <fa-icon [icon]="faPen"></fa-icon>
           </button>
           <button type="button" class="btn btn-danger m-1" (click)="confirmDeletePill(pill)">

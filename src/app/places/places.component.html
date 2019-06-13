@@ -24,7 +24,7 @@
         <td>{{place.name}}</td>
         <td class="text-pre-line">{{place.description}}</td>
         <td class="text-center align-middle" *ngIf="canEdit">
-          <button type="button" class="btn btn-default m-1" (click)="startEditPlace(place)">
+          <button type="button" class="btn btn-secondary m-1" (click)="startEditPlace(place)">
             <fa-icon [icon]="faPen"></fa-icon>
           </button>
           <button type="button" class="btn btn-danger m-1" (click)="confirmDeletePlace(place)">

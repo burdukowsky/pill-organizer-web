@@ -15,7 +15,7 @@ import {AuthService} from '../auth/auth.service';
   styleUrls: ['./places.component.scss']
 })
 export class PlacesComponent implements OnInit {
-  @ViewChild('placeModalTemplate', { static: false })
+  @ViewChild('placeModalTemplate', {static: false})
   private placeModalTemplate: TemplateRef<any>;
 
   places: Array<Place> = [];

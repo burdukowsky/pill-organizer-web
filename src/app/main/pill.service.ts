@@ -3,29 +3,30 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {Pill} from './pill';
-import {environment} from '../../environments/environment';
+import {AppConfig} from '../app-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PillService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private appConfig: AppConfig) {
   }
 
   getPills(): Observable<Array<Pill>> {
-    return this.http.get<Array<Pill>>(`${environment.api}/pills`);
+    return this.http.get<Array<Pill>>(`${this.appConfig.api}/pills`);
   }
 
   createPill(pill: Pill): Observable<Pill> {
-    return this.http.post<Pill>(`${environment.api}/pills`, pill);
+    return this.http.post<Pill>(`${this.appConfig.api}/pills`, pill);
   }
 
   updatePill(pill: Pill): Observable<Pill> {
-    return this.http.put<Pill>(`${environment.api}/pills/${pill.id}`, pill);
+    return this.http.put<Pill>(`${this.appConfig.api}/pills/${pill.id}`, pill);
   }
 
   deletePill(pillId: number): Observable<any> {
-    return this.http.delete<any>(`${environment.api}/pills/${pillId}`);
+    return this.http.delete<any>(`${this.appConfig.api}/pills/${pillId}`);
   }
 }

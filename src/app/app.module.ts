@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {JwtModule} from '@auth0/angular-jwt';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NgHttpLoaderModule} from 'ng-http-loader';
@@ -15,7 +15,6 @@ import {SharedModule} from './shared/shared.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {globals} from './globals';
-import {environment} from '../environments/environment';
 import {AuthService} from './auth/auth.service';
 import {AuthGuard} from './auth/auth.guard';
 import {MainLayoutComponent} from './layouts/main-layout/main-layout.component';
@@ -27,9 +26,26 @@ import {PillsComponent} from './pills/pills.component';
 import {PlacesComponent} from './places/places.component';
 import {UsersComponent} from './users/users.component';
 import {AccountComponent} from './account/account.component';
+import {AppConfig} from './app-config.service';
 
-export function tokenGetter() {
+export function getUrlHost(url: string): string {
+  const pathArray = url.split('/');
+  return pathArray[2];
+}
+
+export function AppConfigFactory(appConfig: AppConfig) {
+  return () => appConfig.init();
+}
+
+export function tokenGetter(): string {
   return localStorage.getItem(globals.localStorageKeys.accessToken);
+}
+
+export function JwtOptionsFactory(appConfig: AppConfig) {
+  return {
+    tokenGetter: tokenGetter,
+    whitelistedDomains: [getUrlHost(appConfig.api)]
+  };
 }
 
 @NgModule({
@@ -50,9 +66,10 @@ export function tokenGetter() {
     BrowserModule,
     AppRoutingModule,
     JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: [environment.apiWithoutProtocol]
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: JwtOptionsFactory,
+        deps: [AppConfig]
       }
     }),
     FormsModule,
@@ -65,7 +82,16 @@ export function tokenGetter() {
     TypeaheadModule.forRoot(),
     TooltipModule.forRoot()
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: AppConfigFactory,
+      deps: [AppConfig],
+      multi: true
+    },
+    AuthService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

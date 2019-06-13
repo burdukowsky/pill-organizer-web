@@ -74,7 +74,7 @@ export function JwtOptionsFactory(appConfig: AppConfig) {
     }),
     FormsModule,
     HttpClientModule,
-    NgHttpLoaderModule,
+    NgHttpLoaderModule.forRoot(),
     FilterPipeModule,
     FontAwesomeModule,
     AlertModule.forRoot(),

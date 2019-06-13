@@ -15,7 +15,7 @@ import {Role, getAllRoles} from './role';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  @ViewChild('userModalTemplate')
+  @ViewChild('userModalTemplate', { static: false })
   private userModalTemplate: TemplateRef<any>;
 
   users: Array<User> = [];

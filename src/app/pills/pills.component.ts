@@ -15,7 +15,7 @@ import {AuthService} from '../auth/auth.service';
   styleUrls: ['./pills.component.scss']
 })
 export class PillsComponent implements OnInit {
-  @ViewChild('pillModalTemplate')
+  @ViewChild('pillModalTemplate', { static: false })
   private pillModalTemplate: TemplateRef<any>;
 
   pills: Array<Pill> = [];
